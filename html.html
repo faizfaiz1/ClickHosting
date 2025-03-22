@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BotHost24 - استضافة بوتات ديسكورد 24/24</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #7289da;
+            --secondary-color: #2c2f33;
+            --accent-color: #5865f2;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #23272a;
+            --success-color: #43b581;
+            --warning-color: #faa61a;
+            --danger-color: #f04747;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: #fff;
+            font-weight: 300;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            border-radius: 0 0 10px 10px;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        /* Upload Bot Section */
+        .upload-section {
+            padding: 80px 0;
+            background-color: var(--light-bg);
+        }
+        
+        .upload-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .file-upload i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .pricing-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background-color: var(--warning-color);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: #777;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            margin: 30px 0;
+            text-align: right;
+        }
+        
+        .pricing-card ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 25px;
+        }
+        
+        .pricing-card ul li::before {
+            content: "✓";
+            color: var(--success-color);
+            position: absolute;
+            right: 0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background-color: var(--primary-color);
+                padding: 20px;
+                z-index: 100;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Bot<span>Host24</span></a>
+                <ul class="nav-links">
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#upload">رفع البوت</a></li>
+                    <li><a href="#pricing">الأسعار</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>استضافة بوتات ديسكورد الخاصة بك 24/24</h1>
+            <p>نقدم لك خدمة استضافة بوتات ديسكورد موثوقة وسريعة مع وقت تشغيل 99.9%</p>
+            <div class="hero-buttons">
+                <a href="#upload" class="btn btn-primary">رفع بوت الآن</a>
+                <a href="#pricing" class="btn btn-secondary">عرض الأسعار</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">لماذا تختار خدمتنا؟</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🕒</div>
+                    <h3>تشغيل 24/24</h3>
+                    <p>بوتك سيعمل بدون توقف على مدار الساعة طوال أيام الأسبوع</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>سرعة فائقة</h3>
+                    <p>خوادم قوية تضمن استجابة سريعة وأداء ممتاز للبوت الخاص بك</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>حماية متقدمة</h3>
+                    <p>حماية ضد الهجمات وتشفير البيانات لضمان أمان بوتك</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>إحصائيات مفصلة</h3>
+                    <p>تتبع أداء البوت الخاص بك مع لوحة تحكم سهلة الاستخدام</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>تحديثات تلقائية</h3>
+                    <p>تحديث البوت الخاص بك تلقائيًا عند تغيير الكود المصدري</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>تنبيهات فورية</h3>
+                    <p>تلقي إشعارات عند توقف البوت أو حدوث أي مشكلة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Bot Section -->
+    <section id="upload" class="upload-section">
+        <div class="container">
+            <h2 class="section-title">رفع البوت الخاص بك</h2>
+            <form class="upload-form">
+                <div class="form-group">
+                    <label for="botName">اسم البوت:</label>
+                    <input type="text" id="botName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="botToken">توكن البوت:</label>
+                    <input type="text" id="botToken" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="botPrefix">بريفكس البوت (اختياري):</label>
+                    <input type="text" id="botPrefix" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>رفع ملف البوت (ZIP):</label>
+                    <div class="file-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>اسحب الملف هنا أو اضغط للاستعراض</p>
+                        <input type="file" id="botFile" accept=".zip" style="display: none;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="githubUrl">أو رابط GitHub (اختياري):</label>
+                    <input type="url" id="githubUrl" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="notes">ملاحظات إضافية (اختياري):</label>
+                    <textarea id="notes" class="form-control" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">رفع البوت</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">خطط الأسعار</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>الخطة المجانية</h3>
+                    <div class="price">0$<span>/شهرياً</span></div>
+                    <ul>
+                        <li>استضافة بوت واحد</li>
+                        <li>256MB RAM</li>
+                        <li>بدون قاعدة بيانات</li>
+                        <li>وقت تشغيل 95%</li>
+                        <li>دعم عبر البريد الإلكتروني</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">ابدأ الآن</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="popular-tag">الأكثر شعبية</div>
+                    <h3>الخطة الاحترافية</h3>
+                    <div class="price">9.99$<span>/شهرياً</span></div>
+                    <ul>
+                        <li>استضافة 3 بوتات</li>
+                        <li>512MB RAM لكل بوت</li>
+                        <li>قاعدة بيانات MongoDB</li>
+                        <li>وقت تشغيل 99.9%</li>
+                        <li>دعم فني على مدار 24 ساعة</li>
+                        <li>لوحة تحكم متقدمة</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">اشترك الآن</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>خطة الأعمال</h3>
+                    <div class="price">24.99$<span>/شهرياً</span></div>
+                    <ul>
+                        <li>استضافة 10 بوتات</li>
+                        <li>1GB RAM لكل بوت</li>
+                        <li>قاعدة بيانات MongoDB + Redis</li>
+                        <li>وقت تشغيل 99.99%</li>
+                        <li>دعم فني متميز</li>
+                        <li>لوحة تحكم متقدمة</li>
+                        <li>API مخصصة</li>
+                        <li>اسم نطاق فرعي مخصص</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">اشترك الآن</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">Bot<span>Host24</span></div>
+                    <p>استضافة بوتات ديسكورد بكفاءة عالية على مدار الساعة</p>
+                </div>
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#features">المميزات</a></li>
+                        <li><a href="#upload">رفع البوت</a></li>
+                        <li><a href="#pricing">الأسعار</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                جميع الحقوق محفوظة © 2025 BotHost24
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // File upload functionality
+        document.querySelector('.file-upload').addEventListener('click', function() {
+            document.getElementById('botFile').click();
+        });
+        
+        document.getElementById('botFile').addEventListener('change', function() {
+            if (this.files.length > 0) {
+                const fileName = this.files[0].name;
+                document.querySelector('.file-upload p').textContent = 'تم اختيار: ' + fileName;
+            }
+        });
+    </script>
+
+
+
+
+<script>
+    document.querySelector(".upload-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        let formData = new FormData();
+        formData.append("botName", document.getElementById("botName").value);
+        formData.append("botToken", document.getElementById("botToken").value);
+        formData.append("botPrefix", document.getElementById("botPrefix").value);
+        formData.append("githubUrl", document.getElementById("githubUrl").value);
+        formData.append("notes", document.getElementById("notes").value);
+
+        let fileInput = document.getElementById("botFile");
+        if (fileInput.files.length > 0) {
+            formData.append("botFile", fileInput.files[0]);
+        }
+
+        let notification = document.getElementById("notification");
+        notification.style.display = "block";
+        notification.textContent = "⏳ يتم رفع البوت...";
+        notification.style.backgroundColor = "#faa61a";
+
+        try {
+            let response = await fetch("http://localhost:5000/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            let result = await response.json();
+            notification.textContent = result.message;
+            notification.style.backgroundColor = result.message.includes("✅") ? "#43b581" : "#f04747";
+        } catch (error) {
+            notification.textContent = "❌ حدث خطأ أثناء الرفع!";
+            notification.style.backgroundColor = "#f04747";
+        }
+    });
+</script>
+
+<!-- إشعار الرفع -->
+<div id="notification" class="notification" style="display: none;"></div>
+
+<style>
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        background-color: #43b581;
+        color: white;
+        border-radius: 5px;
+        font-size: 16px;
+        display: none;
+        z-index: 1000;
+    }
+</style>
+
+</body>
+</html>
